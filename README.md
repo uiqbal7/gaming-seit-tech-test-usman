@@ -2,9 +2,9 @@
 
 ## Software Engineer in Test Tech Test
 
-Thank you for your interest in the role. We are delighted to invite your for an interview but before that, it would be great if you could take a little bit of time to look at the following tasks. It will give us an idea into your technical approach to testing at this time.
+Thank you for your interest in the role. So that we can get a feel for how you would approach technical testing at this time, it would be great if you could take a little bit of time to look at the following tasks.
 
-The team that you will be working in provide GraphQL interfaces to consumers, providing valuable data on games and users to enable a great customer experience. What we are looking for you to do, is to test a scaled down version of one of our systems. We are looking for a lightweight and reusable test framework asserting that the data that is being requested is what we are expecting.
+In gaming, the back end services team provide GraphQL interfaces to consumers, providing valuable data on games and users to enable a great customer experience. What we are looking for you to do, is to test a scaled down version of one of our systems. We are looking for a lightweight and reusable test framework asserting that the data that is being requested is what we are expecting.
 
 You can do this in whatever language, tool or framework that you desire but we will be looking for:
 - Well structured code
@@ -29,6 +29,10 @@ As mentioned above, the language, framework or tools that you use are not restri
 - A clear output of the tests that were run
 - A simple way of running the tests
 - Solid and comprehensive test coverage
+
+Other considerations you might want to have a think about include:
+- The ability to run your tests across platforms
+- How you would reuse across multiple environments
 
 If you have any issues with your code or any limitation of the application, please feel free to use pseudo code and comments to explain the thought process.
 
