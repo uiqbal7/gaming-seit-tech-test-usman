@@ -1,0 +1,813 @@
+{
+	"info": {
+		"_postman_id": "658cb408-e488-434e-a853-59eb2df0c9f2",
+		"name": "usman-SBG-game",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8242082"
+	},
+	"item": [
+		{
+			"name": "Smoke Tests",
+			"item": [
+				{
+					"name": "GET-now",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n  now\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check id returned matches variable sent",
+									"pm.test(\"[Test Case] - Check id retuned matches gameId\", function () {",
+									"    pm.expect(jsonData.data.game.id).to.eql(2);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n  game(id:{{gameId}}) {\n    id\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-slug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check slug returned matches collection variable",
+									"pm.test(\"[Test Case] - slug returned matches collection variable\", function () {",
+									"    pm.expect(jsonData.data.gameBySlug.slug).to.eql(pm.collectionVariables.get(\"slug\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n  gameBySlug(slug:\"{{slug}}\") {\n    slug\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-games",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check id exists",
+									"pm.test(\"[Test Case] - Array 0 equals id 1\", function () {",
+									"    pm.expect(jsonData.data.games[0].id).to.eql(1);",
+									"});",
+									"",
+									"//Check id exists",
+									"pm.test(\"[Test Case] - Array 2 equals id 3\", function () {",
+									"    pm.expect(jsonData.data.games[2].id).to.eql(3);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n  games {\n    id\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-suppliers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check supllier exists",
+									"pm.test(\"[Test Case] - Array 0 equals id 1 - Greeny's Games\", function () {",
+									"    pm.expect(jsonData.data.suppliers[0].id).to.eql(1);",
+									"    pm.expect(jsonData.data.suppliers[0].name).to.eql(\"Greeny's Games\");",
+									"});",
+									"",
+									"//Check id exists",
+									"pm.test(\"[Test Case] - Array 1 equals id 2 - Miller's Millions\", function () {",
+									"    pm.expect(jsonData.data.suppliers[1].id).to.eql(2);",
+									"    pm.expect(jsonData.data.suppliers[1].name).to.eql(\"Miller's Millions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n  suppliers {\n    id\n    name\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-addGame",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Set game name",
+									"pm.collectionVariables.set(\"smokeGameId\", jsonData.data.addGame.id);",
+									"",
+									"//Set game name",
+									"pm.collectionVariables.set(\"gameName\", jsonData.data.addGame.name);",
+									"",
+									"//Set slug name",
+									"pm.collectionVariables.set(\"slugName\", jsonData.data.addGame.slug);",
+									"",
+									"",
+									"/**********/",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"//Check name of game",
+									"pm.test(\"[Test Case] - Name of Game equals request payload\", function () {",
+									"    pm.expect(jsonData.data.addGame.name).to.eql(pm.collectionVariables.get(\"gameName\"));",
+									"});",
+									"",
+									"//Check name of slug",
+									"pm.test(\"[Test Case] - Name of Slug equals request payload\", function () {",
+									"    pm.expect(jsonData.data.addGame.slug).to.eql(pm.collectionVariables.get(\"slugName\"));",
+									"});",
+									"",
+									"//Check supplier details",
+									"pm.test(\"[Test Case] - Check supplier id\", function () {",
+									"    pm.expect(jsonData.data.addGame.supplier.id).to.eql(1);",
+									"});",
+									"",
+									"pm.test(\"[Test Case] - Check supplier name\", function () {",
+									"    pm.expect(jsonData.data.addGame.supplier.name).to.eql(\"Greeny's Games\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n  addGame(input: {name: \"{{$guid}}-Smoke-Test-Usman\", slug: \"{{$guid}}-Smoke-Slug-Usman\", supplier: 1}) {\n    id\n    name\n    slug\n    supplier {\n      id\n      name\n    }\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-updateGame",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check name of game",
+									"pm.test(\"[Test Case] - Name of Game equals request payload\", function () {",
+									"    pm.expect(jsonData.data.updateGame.name).to.contain(\"UPDATE usman game\");",
+									"});",
+									"",
+									"//Check name of slug",
+									"pm.test(\"[Test Case] - Name of Slug equals request payload\", function () {",
+									"    pm.expect(jsonData.data.updateGame.slug).to.contain(\"UPDATE slug-Usman\");",
+									"});",
+									"",
+									"//Check supplier details",
+									"pm.test(\"[Test Case] - Supplier id changed\", function () {",
+									"    pm.expect(jsonData.data.updateGame.supplier.id).to.eql(2);",
+									"});",
+									"",
+									"// Check supplier name ",
+									"pm.test(\"[Test Case] - Supplier name updated\", function () {",
+									"    pm.expect(jsonData.data.updateGame.supplier.name).to.eql(\"Miller's Millions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n  updateGame(id: {{smokeGameId}}, input: {name: \"{{$guid}}-UPDATE usman game\", slug: \"{{$guid}}-UPDATE slug-Usman\", supplier: 2}) {\n    id\n    name\n    slug\n    supplier {\n      id\n      name\n    }\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Query",
+			"item": [
+				{
+					"name": "GET-allGames",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check random game",
+									"pm.test(\"[Test Case] - Check Random Game is present\", function () {",
+									"    pm.expect(jsonData.data.games[0].id).to.eql(1);",
+									"    pm.expect(jsonData.data.games[0].name).to.eql(\"Random Game\");",
+									"    pm.expect(jsonData.data.games[0].slug).to.eql(\"random-game\");",
+									"});",
+									"",
+									"//Check Lucky Pots",
+									"pm.test(\"[Test Case] - Check Lucky Pots is present\", function () {",
+									"    pm.expect(jsonData.data.games[1].id).to.eql(2);",
+									"    pm.expect(jsonData.data.games[1].name).to.eql(\"Lucky Pots\");",
+									"    pm.expect(jsonData.data.games[1].supplier.id).to.eql(2);",
+									"    pm.expect(jsonData.data.games[1].supplier.name).to.eql(\"Miller's Millions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n  games {\n    id\n    name\n    slug\n    supplier {\n      id\n      name\n    }\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-gameWithValidId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check Lucky Pots",
+									"pm.test(\"[Test Case] - Check Lucky Pots is present\", function () {",
+									"    pm.expect(jsonData.data.game.id).to.eql(2);",
+									"    pm.expect(jsonData.data.game.name).to.eql(\"Lucky Pots\");",
+									"    pm.expect(jsonData.data.game.supplier.id).to.eql(2);",
+									"    pm.expect(jsonData.data.game.supplier.name).to.eql(\"Miller's Millions\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query\n  {\n    game(id:{{gameId}})\n    { id \n      name\n      slug   \n      supplier {\n          id\n          name\n      }             \n    }\n  }",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-gameWithInvalidId",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check random game",
+									"pm.test(\"[Test Case] - Check error message\", function () {",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Cannot return null for non-nullable field Game.id.\");",
+									"    pm.expect(jsonData.errors[0].locations[0].line).to.eql(4);",
+									"    pm.expect(jsonData.errors[0].locations[0].column).to.eql(7);",
+									"    pm.expect(jsonData.errors[0].path[0]).to.contains(\"game\",\"id\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query\n  {\n    game(id:999)\n    { id \n      name\n      slug   \n      supplier {\n          id\n          name\n      }             \n    }\n  }",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mutations",
+			"item": [
+				{
+					"name": "POST-createNewGame",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check name of game",
+									"pm.test(\"[Test Case] - Name of Game equals request payload\", function () {",
+									"    pm.expect(jsonData.data.addGame.name).to.contain(\"Usmans Game\");",
+									"});",
+									"",
+									"//Check name of slug",
+									"pm.test(\"[Test Case] - Name of Slug equals request payload\", function () {",
+									"    pm.expect(jsonData.data.addGame.slug).to.contain(\"Usmans Game\");",
+									"});",
+									"",
+									"//Check supplier details",
+									"pm.test(\"[Test Case] - Check supplier id\", function () {",
+									"    pm.expect(jsonData.data.addGame.supplier.id).to.eql(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n  addGame(input: {name: \"{{$guid}}-Usmans Game\", slug: \"{{$guid}}-Usmans Game\", supplier: 1}) {\n    id\n    name\n    slug\n    supplier {\n      id\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-addGameWithoutCorrectInput",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 400 - Bad Request\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"//Check Error message",
+									"pm.test(\"[Test Case] - Check Error message is returned\", function () {",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Field \\\"GameInput.slug\\\" of required type \\\"String!\\\" was not provided.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n  addGame(input: {name: \"Usmans Game 1\", supplier: 1}) {\n    id\n    name\n    slug\n    supplier {\n      id\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST-addGame-supplierNotMatching",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Store response as jsonData",
+									"var jsonData = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"//Check supplier details",
+									"pm.test(\"[Test Case] - Check supplier id\", function () {",
+									"    pm.expect(jsonData.data.addGame.supplier.id).to.eql(2);",
+									"});",
+									"",
+									"// Supplier should be set to 2 but is showing as 1"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n  addGame(input: {name: \"{{$guid}}-defect-supplier\", slug: \"{{$guid}}-defect-supplier\", supplier: 2}) {\n    id\n    name\n    slug\n    supplier {\n      id\n    }\n  }\n}\n\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}:{{port}}/graphql",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gameId",
+			"value": "2"
+		},
+		{
+			"key": "slug",
+			"value": "random-game"
+		},
+		{
+			"key": "gameName",
+			"value": ""
+		},
+		{
+			"key": "slugName",
+			"value": ""
+		},
+		{
+			"key": "smokeGameId",
+			"value": ""
+		}
+	]
+}
